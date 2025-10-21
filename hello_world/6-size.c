@@ -1,9 +1,11 @@
 #include <stdio.h>
+
 /**
  * main - Prints the size of various types
  *
  * Return: 0
  */
+
 int main(void)
 
 {
