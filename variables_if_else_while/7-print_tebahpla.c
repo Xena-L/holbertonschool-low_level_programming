@@ -3,9 +3,9 @@
 /**
 * main - Entry point
 *
-* Description: Displays numbers from 0 to 9
-* i'am use only putchar for two times
-* no variables type char
+* Description: Displays lowercase alphabet in reverse,
+* followed by new line
+* i'am only use putchar and two times
 *
 * Return: Always 0 (Success)
 */
@@ -14,7 +14,7 @@ int main(void)
 {
 int x;
 
-for (x = 48; x <= 57; x++)
+for (x = 122; x >= 92; x--)
 putchar(x);
 
 putchar('\n');
