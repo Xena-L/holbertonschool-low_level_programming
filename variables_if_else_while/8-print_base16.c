@@ -16,7 +16,7 @@ int x;
 int z;
 
 for (x = 0 ; x <= 9; x++)
-putchar(x +'0');
+putchar(x + '0');
 for (z = 'a' ; z <= 'f'; z++)
 putchar(z);
 
