@@ -3,14 +3,19 @@
 
 int main(void)
 {
-char c;
+    int r;
 
-for (c = 'A'; c <= 'z'; c++)
-{
-if (_islower(c))
-printf("%c is lowercase\n", c);
-else
-printf("%c is NOT lowercase\n", c);
-}
+printf("Test _isalpha:\n");
+r = _isalpha('H');
+_putchar(r + '0');
+r = _isalpha('o');
+_putchar(r + '0');
+r = _isalpha(108); /* 'l' */
+_putchar(r + '0');
+r = _isalpha(';');
+_putchar(r + '0');
+_putchar('\n');
+
 return (0);
 }
+
