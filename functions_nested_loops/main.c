@@ -1,8 +1,16 @@
+#include <stdio.h>
 #include "main.h"
 
 int main(void)
 {
-    print_alphabet();
-    return (0);
-}
+char c;
 
+for (c = 'A'; c <= 'z'; c++)
+{
+if (_islower(c))
+printf("%c is lowercase\n", c);
+else
+printf("%c is NOT lowercase\n", c);
+}
+return (0);
+}
