@@ -10,9 +10,16 @@
 
 int main(void)
 {
-printf("_putchar");
+char text[] = "_putchar";
+int i;
+
+for (i = 0; text[i] != '\0'; i++)
+{
+putchar(text[i]);
+}
 
 putchar('\n');
 
 return (0);
 }
+
