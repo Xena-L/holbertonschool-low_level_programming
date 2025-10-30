@@ -13,9 +13,9 @@ void more_numbers(void)
 {
 int x, l;
 
-for (x = 0 ; x >= 10 ; x++)
+for (x = 0 ; x < 10 ; x++)
 {
-for (l = 0; l < 10; l++)
+for (l = 0; l <= 14; l++)
 {
 if (l / 10)
 _putchar((l / 10) + '0');
