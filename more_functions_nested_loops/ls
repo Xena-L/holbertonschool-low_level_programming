@@ -1,0 +1,627 @@
+[4mMAN[24m(1)                             Utilitaires de l'afficheur des pages de manuel                            [4mMAN[24m(1)
+
+[1mNOM[0m
+       man - Interface de consultation des manuels de référence du système
+
+[1mSYNOPSIS[0m
+       [1mman [22m[[4moptions[24m [4mde[24m [4mman[24m] [[[4msection[24m] [4mpage[24m ...] ...
+       [1mman -k [22m[[4moptions[24m [4md'apropos[24m] [4mexpression_rationnelle[24m ...
+       [1mman -K [22m[[4moptions[24m [4mde[24m [4mman[24m] [[4msection[24m] [4mterm[24m ...
+       [1mman -f [22m[[4moptions[24m [4mde[24m [4mwhatis[24m] [4mpage[24m ...
+       [1mman -l [22m[[4moptions[24m [4mde[24m [4mman[24m] [4mfichier[24m ...
+       [1mman -w[22m|[1m-W [22m[[4moptions[24m [4mde[24m [4mman[24m] [4mpage[24m ...
+
+[1mDESCRIPTION[0m
+       [1mman  [22mest le programme de visualisation des pages de manuel. Chacun des arguments [4mpage[24m, indiqué dans la ligne
+       de commande de [1mman[22m, porte, en principe, le nom d'un programme, d'un utilitaire ou d'une fonction. La [4mpage[24m [4mde[0m
+       [4mmanuel[24m correspondant à chaque argument est alors trouvée et affichée. Si une [4msection[24m est précisée alors  [1mman[0m
+       limite  la  recherche à cette [4msection[24m. Par défaut, il recherche dans toutes les [4msections[24m disponibles en sui‐
+       vant un ordre prédéfini (voir [1mDEFAULTS[22m). Il n'affiche que la  première  [4mpage[24m  [4mde[24m  [4mmanuel[24m  trouvée,  même  si
+       d'autres [4mpages[24m [4mde[24m [4mmanuel[24m existent dans d'autres [4msections[24m.
+
+       Le  tableau  ci-dessous  indique  le  numéro  des  [4msections[24m  de  manuel  ainsi que le type de pages qu'elles
+       contiennent.
+
+       1   Programmes exécutables ou commandes de l'interpréteur de commandes (shell)
+       2   Appels système (fonctions fournies par le noyau)
+       3   Appels de bibliothèque (fonctions fournies par les bibliothèques des programmes)
+       4   Fichiers spéciaux (situés généralement dans [4m/dev[24m)
+       5   Formats des fichiers et conventions. Par exemple  [4m/etc/passwd[0m
+       6   Jeux
+       7   Miscellaneous (including macro packages and conventions), e.g. [1mman[22m(7), [1mgroff[22m(7), [1mman-pages[22m(7)
+       8   Commandes de gestion du système (généralement réservées au superutilisateur)
+       9   Sous-programmes du noyau [hors standard]
+
+       Une [4mpage[24m de manuel est constituée de plusieurs sections.
+
+       Conventional section names include [1mNAME[22m, [1mSYNOPSIS[22m, [1mCONFIGURATION[22m,  [1mDESCRIPTION[22m,  [1mOPTIONS[22m,  [1mEXIT STATUS[22m,  [1mRE‐[0m
+       [1mTURN VALUE[22m, [1mERRORS[22m, [1mENVIRONMENT[22m, [1mFILES[22m, [1mVERSIONS[22m, [1mSTANDARDS[22m, [1mNOTES[22m, [1mBUGS[22m, [1mEXAMPLE[22m, [1mAUTHORS[22m, and [1mSEE ALSO[22m.
+
+       Les  conventions  suivantes s'appliquent à la section [1mSYNOPSIS [22met peuvent être utilisées comme un guide pour
+       les autres sections.
+
+       [1mtexte gras         [22mà taper exactement comme indiqué ;
+       [4mtexte[24m [4mitalique[24m     à remplacer par l'argument approprié ;
+       [[1m-abc[22m]             tous les arguments entre [ ] sont facultatifs ;
+       [1m-a[22m|[1m-b              [22mles options séparées par | ne peuvent pas être utilisées simultanément ;
+       [4margument[24m ...       [4margument[24m peut être répété ;
+       [[4mexpression[24m] ...   toute l'[4mexpression[24m située à l'intérieur de [ ] peut être répétée.
+
+       Le rendu exact dépend du dispositif d'affichage. Par exemple, man ne sera généralement pas  capable  d'affi‐
+       cher les italiques dans un terminal, et utilisera typiquement le soulignement ou la coloration du texte à la
+       place.
+
+       Le synopsis de la commande ou de la fonction est un modèle qui permet de représenter toutes les utilisations
+       possibles.  Dans certains cas, il est recommandé d'illustrer plusieurs utilisations exclusives comme dans la
+       partie [1mSYNOPSIS [22mde cette page de manuel.
+
+[1mEXEMPLES[0m
+       [1mman [4m[22mls[0m
+           Affiche la page de manuel de l'[4mélément[24m (du programme) [4mls[24m.
+
+       [1mman [4m[22mman[24m.[4m7[0m
+           Affiche la page de manuel de la macro [4mman[24m à la section [4m7[24m. (C'est une autre orthographe de "[1mman [4m[22m7[24m [4mman[24m".)
+
+       [1mman '[4m[22mman[24m([4m7[24m)[1m'[0m
+           Affiche la page de manuel du paquet de macro [4mman[24m pour la section [4m7[24m (Autre orthographe de "[1mman  [4m[22m7[24m  [4mman[24m").
+           Cela  est  utile  pour copier ou coller des références croisées de pages de manuel. Notez que les paren‐
+           thèses doivent normalement être échappées pour les protéger dans le shell.
+
+       [1mman -a [4m[22mintro[0m
+           Affiche, successivement, toutes les pages de manuel disponibles nommées « [4mintro[24m ». Il  est  possible  de
+           s'arrêter après l'affichage de chaque page ou de sauter n'importe quelle page.
+
+       [1mman -t [4m[22mbash[24m | [4mlpr[24m [4m-Pps[0m
+           Formate  la page du manuel de [4mbash[24m selon le format par défaut ([1mtroff [22mou [1mgroff[22m) et la redirige vers l'im‐
+           primante nommée [4mps[24m. Le format par défaut généré pour [1mgroff [22mest habituellement PostScript. [1mman --help [22mde‐
+           vrait préciser le format associé à l'option [1m-t[22m.
+
+       [1mman -l -T[4m[22mdvi[24m [4m./toto.1x.gz[24m [1m> [4m[22m./toto.1x.dvi[0m
+           Cette commande décompresse puis met en forme la page de manuel source nroff  nommée  [4m./toto.1x.gz[24m.  Elle
+           l'enregistre  ensuite  dans  un  fichier « [1mdevice independent (dvi) [22m». La redirection est nécessaire car
+           l'option [1m-T [22mproduit un envoi vers la sortie standard ([1mstdout[22m) sans aucun programme d'affichage.  Le  ré‐
+           sultat  peut  être  visualisé avec un programme tel que [1mxdvi [22mou être ultérieurement transformé au format
+           PostScript grâce à un programme comme [1mdvips[22m.
+
+       [1mman -k [4m[22mprintf[0m
+           Recherche la description courte et le nom des pages de manuel  comportant  le  mot-clé  [4mprintf[24m,  utilisé
+           comme  une expression rationnelle, puis affiche tout ce qui a été trouvé. Cette commande est équivalente
+           à [1mapropos [4m[22mprintf[24m[1m.[0m
+
+       [1mman -f [4m[22msmail[0m
+           Recherche les pages de manuel nommées [4msmail[24m et en affiche les descriptions courtes.  Équivalent  à  [1mwha‐[0m
+           [1mtis [4m[22msmail[24m[1m.[0m
+
+[1mVUE D'ENSEMBLE[0m
+       Beaucoup  d'options  sont  disponibles avec [1mman [22mafin de donner autant de souplesse que possible à l'utilisa‐
+       teur. Des modifications peuvent être apportées au chemin de recherche, à l'ordre d'exploration des sections,
+       au programme d'affichage ainsi qu'à d'autres éléments et comportements. Tout ceci est détaillé ci-après.
+
+       Si elles ne sont pas vides, diverses variables d'environnement sont exploitées pour influer sur le fonction‐
+       nement de [1mman[22m. Il est possible de donner à la variable « fourre-tout » $[1mMANOPT [22mn'importe  quelle  chaîne  de
+       caractères respectant le format de la ligne de commande. La seule condition est que toutes les espaces, uti‐
+       lisées  en  tant  qu'élément  de  l'argument  d'une  option, soient protégés, c'est-à-dire précédées par une
+       contre-oblique « \ » (antislash). [1mman [22manalysera $[1mMANOPT [22mavant d'analyser sa propre ligne de commande. Ainsi,
+       les options exigeant un argument seront remplacées par les mêmes options trouvées sur la ligne de  commande.
+       Pour  ignorer  toutes les options placées dans $[1mMANOPT[22m, l'option [1m-D [22mpeut être indiquée comme option initiale
+       de la ligne de commande. Ceci permettra à man d'« oublier » les options indiquées dans  $[1mMANOPT[22m.  Toutefois,
+       celles-ci doivent quand même être valides.
+
+       Les   pages  de  manuel  sont  ordinairement  stockées  au  format  [1mnroff[22m(1)  dans  un  répertoire  tel  que
+       [4m/usr/share/man[24m. Pour certaines installations, des pages préformatées ([4mcat[24m [4mpages[24m) sont aussi disponibles pour
+       améliorer les preformances. Voir [1mmanpath[22m(5) pour les détails et l'emplacement de ces fichiers.
+
+       Ce paquet prend en charge les pages de manuel en plusieurs langues, suivant votre [4mlocale[24m. Si  votre  système
+       ne  configure  pas  automatiquement cette information pour vous, vous pouvez définir $[1mLC_MESSAGES[22m, $[1mLANG[22m, ou
+       une autre variable d'environnement système pour indiquer votre locale préférée au format [1mPOSIX [22m:
+
+       <[4mlangue[24m>[[1m_[22m<[4mpays[24m>[[1m.[22m<[4mjeu_de_caractères[24m>[[1m,[22m<[4mversion[24m>]]]
+
+       Si la page désirée est disponible dans votre « [4mlocale[24m » (dans votre langue ou votre dialecte), elle sera af‐
+       fichée au lieu de la page standard, écrite le plus souvent dans le dialecte anglo-américain (en_US).
+
+       Si vous constatez que les traductions de ce paquet ne sont pas disponibles dans votre  langue  et  souhaitez
+       les réaliser, contactez le responsable qui coordonnera cette activité.
+
+       Les  pages  de  manuel  individuelles  sont d'ordinaire écrites et mises à jour par les mainteneurs des pro‐
+       grammes et fonctions concernés (ou autres sujets) et ne sont pas inclus dans ce paquet. Si vous trouvez  une
+       erreur ou l'absence d'une page de manuel, veuillez contacter les mainteneurs des paquets concernés.
+
+       Pour  obtenir  des  renseignements concernant d'autres fonctionnalités disponibles avec cet afficheur de ma‐
+       nuel, lire les documents fournis avec le programme.
+
+[1mCOMPORTEMENT PAR DÉFAUT[0m
+       L'ordre de recherche dans les sections peut être modifié par la variable d'environnement $[1mMANSECT [22mou par  la
+       directive [1mSECTION [22mdu fichier [4m/etc/manpath.config[24m. L'ordre par défaut est :
+
+              1 n l 8 3 0 2 3type 3posix 3pm 3perl 3am 5 4 9 6 7
+
+       La  page  de  manuel  formatée est affichée à l'aide d'un [4mpager[24m. Il peut être choisi de multiple manières ou
+       être celui par défaut (voir l'option [1m-P [22mpour plus de détails).
+
+       Les filtres sont déterminés de plusieurs façons. Tout d'abord, l'option [1m-p [22mou  la  variable  d'environnement
+       $[1mMANROFFSEQ  [22msont  vérifiées. Si [1m-p [22mn'est pas employée et que la variable d'environnement est vide, alors la
+       première ligne du fichier nroff est analysée à la recherche d'une chaîne de caractères indiquant le  prépro‐
+       cesseur  à  utiliser.  Pour que l'indication du préprocesseur soit valide, la première ligne doit ressembler
+       à :
+
+       [1m'\" [22m<[1mchaîne[22m>
+
+       dans laquelle [1mchaîne [22mpeut être n'importe quelle combinaison de lettres, décrite par l'option [1m-p [22mci-dessous.
+
+       Si aucune des méthodes précédentes ne fournit d'indication sur le filtre à utiliser, une valeur  par  défaut
+       est utilisée.
+
+       Une  chaîne  de  formatage  est constituée et exécutée à partir des filtres et du format de départ ([1mnroff [22mou
+       [[1mtg[22m][1mroff [22mavec l'option [1m-t[22m). Toutefois, si un programme exécutable [4mmandb_nfmt[24m (ou  [4mmandb_tfmt[24m  avec  l'option
+       [1m-t[22m)  existe à la racine de l'arborescence des pages de manuel, c'est lui qui sera exécuté. Il recevra en ar‐
+       gument le fichier source de la page de manuel, la chaîne de préprocesseur et,  éventuellement,  le  périphé‐
+       rique indiqué par les arguments de [1m-T [22mou [1m-E[22m.
+
+[1mOPTIONS[0m
+       La  duplication  d'options  sans argument dans la ligne de commande ou dans $[1mMANOPT [22m(ou dans les deux) n'est
+       pas gênante. Pour les options qui requièrent un argument, chaque duplication remplace la valeur précédemment
+       donnée à l'argument.
+
+   [1mOptions générales[0m
+       [1m-C [4m[22mfichier[24m, [1m--config-file=[4m[22mfichier[0m
+              Use this user configuration file rather than the default of [4m~/.manpath[24m.
+
+       [1m-d[22m, [1m--debug[0m
+              Affiche les informations de mise au point.
+
+       [1m-D[22m, [1m--default[0m
+              Cette option est normalement utilisée en toute première option et réinitialise les  comportements  de
+              [1mman  [22mà  leurs valeurs par défaut. Son utilisation réinitialise les options qui auraient pu être modi‐
+              fiées par les valeurs placées dans $[1mMANOPT[22m. Toutes les options qui suivent [1m-D [22mauront leur effet habi‐
+              tuel.
+
+       [1m--warnings[22m[=[4mavertissements[24m]
+              Enable warnings from [4mgroff[24m. This may be used to perform sanity checks on the source  text  of  manual
+              pages.  [4mwarnings[24m  is  a  comma-separated list of warning names; if it is not supplied, the default is
+              "mac". To disable a [4mgroff[24m warning, prefix it with "!":  for  example,  [1m--warnings=mac,!break  [22menables
+              warnings in the "mac" category and disables warnings in the "break" category. See the “Warnings” node
+              in [1minfo groff [22mfor a list of available warning names.
+
+   [1mModes opératoires principaux[0m
+       [1m-f[22m, [1m--whatis[0m
+              Approximately  equivalent  to [1mwhatis[22m. Display a short description from the manual page, if available.
+              See [1mwhatis[22m(1)  for details.
+
+       [1m-k[22m, [1m--apropos[0m
+              Approximately equivalent to [1mapropos[22m. Search the short manual page descriptions for keywords and  dis‐
+              play any matches. See [1mapropos[22m(1)  for details.
+
+       [1m-K[22m, [1m--global-apropos[0m
+              Recherche  le  texte  dans  toutes les pages de manuel. Il s'agit d'une recherche par force brute qui
+              peut prendre un peu de temps ; si possible, vous devriez indiquer une section pour réduire le  nombre
+              de  pages à prendre en considération. Les termes de la recherche peuvent être de simples chaînes (par
+              défaut) ou des expressions rationnelles si l'option [1m--regex [22mest utilisée.
+
+              Note that this searches the [4msources[24m of the manual pages, not the rendered text, and  so  may  include
+              false  positives  due  to things like comments in source files, or false negatives due to things like
+              hyphens being written as "\-" in source files. Searching the rendered text would be much slower.
+
+       [1m-l[22m, [1m--local-file[0m
+              Activate "local" mode. Format and display local manual files instead of searching  through  the  sys‐
+              tem's manual collection. Each manual page argument will be interpreted as an nroff source file in the
+              correct  format. No cat file is produced. If '-' is listed as one of the arguments, input will be ta‐
+              ken from stdin.
+
+              If this option is not used, then [1mman [22mwill also fall back to interpreting manual page arguments as lo‐
+              cal file names if the argument contains a "/" character, since that is a good indication that the ar‐
+              gument refers to a path on the file system.
+
+       [1m-w[22m, [1m--where[22m, [1m--path[22m, [1m--location[0m
+              N'affiche pas la page de manuel mais affiche le ou les emplacements des fichiers source nroff qui au‐
+              raient dû être formatés. Si l'option [1m-a [22mest aussi utilisée, affiche l'emplacement  de  tous  les  fi‐
+              chiers source correspondants aux critères.
+
+       [1m-W[22m, [1m--where-cat[22m, [1m--location-cat[0m
+              N'affiche pas la pages de manuel mais affiche le ou les emplacements des fichiers « cat » préformatés
+              qui  auraient  dû être affichés. Si l'option [1m-a [22mest aussi utilisée, affiche l'emplacement de tous les
+              fichiers cat préformatés correspondants aux critères.
+
+              Si [1m-w [22met [1m-W [22msont tout les deux utilisées, la source et le fichier formaté sont affichés  en  suivant,
+              séparés  par  un espace. Si toutes les options [1m-w[22m, [1m-W[22m, et [1m-a [22msont utilisées, fait de même pour toutes
+              les correspondances.
+
+       [1m-c[22m, [1m--catman[0m
+              Cette option n'est pas d'un usage général et devrait seulement être utilisée par le programme [1mcatman[22m.
+
+       [1m-R [4m[22mencodage[24m, [1m--recode[22m=[4mencodage[0m
+              Plutôt que de formater la page de manuel comme d'habitude, affiche le code source converti  en  [4menco‐[0m
+              [4mdage[24m indiqué. Si vous connaissez déjà l'encodage du fichier source, vous pouvez aussi utiliser direc‐
+              tement  [1mmanconv[22m(1).  Cependant,  cette  option  permet de convertir plusieurs pages de manuel vers un
+              unique encodage sans devoir explicitement déclarer l'encodage de chacune, à condition qu'elles soient
+              déjà installées dans une structure similaire à la hiérarchie des pages de manuel.
+
+              Veuillez utiliser [1mman-recode[22m(1) à la place pour convertir plusieurs pages de  manuel  car  il  a  été
+              conçu pour un traitement par lot qui est plus rapide.
+
+   [1mTrouver des pages de manuel[0m
+       [1m-L [4m[22mlocale[24m, [1m--locale=[4m[22mlocale[0m
+              [1mman  [22mdétermine  habituellement  la [4mlocale[24m (NdT : la langue ou le dialecte) actuelle par un appel à la
+              fonction C [1msetlocale[22m(3) qui consulte diverses variables d'environnement, y  compris  $[1mLC_MESSAGES  [22met
+              $[1mLANG[22m.  Pour remplacer temporairement la valeur définie, utilisez cette option. Elle fournit directe‐
+              ment à [1mman [22mla chaîne de caractères représentant la [4mlocale[24m. Notez que cette valeur  ne  prendra  effet
+              qu'à  partir  de la recherche des pages. Par conséquent, les autres affichages, tels que les messages
+              d'aide, seront toujours montrés dans la langue initialement déterminée.
+
+       [1m-m [4m[22msystème[24m[,...], [1m--systems=[4m[22msystème[24m[,...]
+              If this system has access to other operating systems' manual pages, they can be accessed  using  this
+              option. To search for a manual page from NewOS's manual page collection, use the option [1m-m NewOS[22m.
+
+              Le  [4msystème[24m  mentionné  peut  être une succession de noms de systèmes d'exploitation, séparés par des
+              virgules. Pour que la recherche ait lieu également sur le système d'exploitation natif, il  faut  in‐
+              clure  le  nom  système  [1mman [22mdans la chaîne fournie en argument (NdT : il semble que le système natif
+              soit inclus dans la recherche, même en l'absence de cette valeur). Cette option remplace la  variable
+              d'environnement $[1mSYSTEM[22m.
+
+       [1m-M [4m[22mliste_de_chemins[24m, [1m--manpath=[4m[22mliste_de_chemins[0m
+              Précise  le  chemin  de  recherche  à utiliser. Par défaut, [1mman [22mse sert de [1mmanpath [22mpour déterminer la
+              liste des chemins d'accès aux structures hiérarchiques de pages de manuel. Cette option  remplace  la
+              variable d'environnement $[1mMANPATH [22met entraîne l'inefficience de l'option [1m-m[22m.
+
+              Chaque  chemin  indiqué  avec  cette  option doit être la racine d'une hiérarchie de pages de manuel,
+              structurée en sections, comme décrit dans le manuel de man-db, sous le titre « The manual  page  sys‐
+              tem ».  Pour consulter des pages de manuel situées en dehors de telles structures hiérarchiques, uti‐
+              lisez l'option [1m-l[22m.
+
+       [1m-S [4m[22mliste[24m, [1m-s [4m[22mliste[24m, [1m--sections=[4m[22mliste[0m
+              La liste [4mliste[24m est une liste de sections séparés par des deux-points ou des virgules,  utilisée  pour
+              déterminer dans quelles sections de manuel rechercher et suivant quel ordre. Cette option remplace la
+              variable d'environnement $[1mMANSECT [22m(l'écriture [1m-s [22mexiste par compatibilité avec System V).
+
+       [1m-e [4m[22msous-extension[24m, [1m--extension=[4m[22msous-extension[0m
+              Certains  programmes  installent  un  grand  nombre de pages de manuel dans la structure hiérarchique
+              principale des manuels, comme celles qui accompagnent le programme  [1mTcl[22m.  Pour  éviter  d'avoir  deux
+              pages  de manuel avec le même nom, comme [1mexit[22m(3), toutes les pages de manuel de [1mTcl [22métaient habituel‐
+              lement assignées à la section [1ml[22m. Comme ceci est maladroit, il est maintenant possible de  mettre  les
+              pages  dans  la  bonne  section,  et  de  leur assigner une extension spécifique. Dans le cas présent
+              [1mexit[22m(3tcl). En fonctionnement normal, [1mman [22maffichera [1mexit[22m(3) de préférence à  [1mexit[22m(3tcl).  Pour  gérer
+              cette situation et éviter d'avoir à connaître la section où se trouve la page désirée, il est mainte‐
+              nant  possible de donner à [1mman [22mune chaîne de [4msous-extension[24m indiquent à quel programme la page appar‐
+              tient. Avec l'exemple ci-dessus, l'emploi de l'option [1m-e tcl [22mlimitera la recherche  aux  pages  ayant
+              une extension [1m*tcl[22m.
+
+       [1m-i[22m, [1m--ignore-case[0m
+              Ignore la casse lors de la recherche de la page de manuel. C'est le comportement par défaut.
+
+       [1m-I[22m, [1m--match-case[0m
+              Cherche la page de manuel en tenant compte de la casse.
+
+       [1m--regex[0m
+              Montre  toutes les pages ayant une partie de leur nom ou description qui correspond à chaque argument
+              [4mpage[24m en tant qu'expression rationnelle, comme avec [1mapropos[22m(1). Puisqu'il n'existe pas de  façon  rai‐
+              sonnable  de  choisir une « meilleure » page lors d'une recherche d'expression rationnelle, cette op‐
+              tion induit [1m-a[22m.
+
+       [1m--wildcard[0m
+              Montre toutes les pages ayant une partie de leur nom ou description qui correspond à chaque  argument
+              [4mpage[24m en utilisant des jokers ([4mwildcards[24m), comme avec [1mapropos[22m(1) [1m--wildcard[22m. L'argument [4mpage[24m doit cor‐
+              respondre  à  la  totalité  du  nom ou de la description, ou aux frontières de mot de la description.
+              Puisqu'il n'existe pas de façon raisonnable de choisir une « meilleure » page lors d'une recherche de
+              joker, cette option induit [1m-a[22m.
+
+       [1m--names-only[0m
+              Si une des options [1m--regex [22mou [1m--wildcard [22mest utilisée, correspond seulement aux noms  de  pages,  pas
+              aux descriptions, comme avec [1mwhatis[22m(1), sans effet sinon.
+
+       [1m-a[22m, [1m--all[0m
+              Par défaut, [1mman [22ms'arrêtera après avoir affiché la page de manuel la plus appropriée trouvée. L'emploi
+              de  cette option force [1mman [22mà afficher toutes les pages de manuel dont les noms satisfont les critères
+              de recherche.
+
+       [1m-u[22m, [1m--update[0m
+              Cette option force [1mman [22mà mettre à jour ses caches et installer les pages de manuel. Ceci  ne  devrait
+              être nécessaire que rarement. À l'ordinaire utilsez de préférence [1mmandb[22m(8).
+
+       [1m--no-subpages[0m
+              Par  défaut,  [1mman  [22messaiera  d'interpréter une paire de noms de page de manuel donnés sur la ligne de
+              commande comme s'il s'agissait d'un seul nom de page de manuel contenant un tiret ou  un  tiret  bas.
+              Cela  prend en charge le motif habituel des programmes avec plusieurs sous-commandes, leur permettant
+              de fournir une page de manuel pour chacune accessible avec une syntaxe  similaire  à  celle  utilisée
+              pour appeler les sous-commandes. Par exemple :
+
+                $ man -aw git diff
+                /usr/share/man/man1/git-diff.1.gz
+
+              Pour désactiver ce comportement, utilisez l'option [1m--no-subpages [22m:
+
+                $ man -aw --no-subpages git diff
+                /usr/share/man/man1/git.1.gz
+                /usr/share/man/man3/Git.3pm.gz
+                /usr/share/man/man1/diff.1.gz
+
+   [1mContrôle du format d'affichage[0m
+       [1m-P [4m[22mafficheur[24m, [1m--pager=[4m[22mafficheur[0m
+              Précise  l'afficheur  à utiliser. Par défaut, [1mman [22mutilise [1mpager[22m, à moins que [1mpager [22mne soit pas défini
+              ou exécutable auquel cas [1mcat [22mest utilisé. Cette option remplace la variable  d'environnement  $[1mMANPA‐[0m
+              [1mGER[22m,  elle-même  remplaçant  la variable d'environnement $[1mPAGER[22m. Elle n'est pas utilisable avec [1m-f [22mou
+              [1m-k[22m.
+
+              La valeur peut être juste un nom de commande ou une commande avec des arguments, et peut utiliser les
+              protections de l'interpréteur (contre-obliques, guillemets  simples  ou  doubles).  L'utilisation  de
+              tubes  pour relier plusieurs commandes n'est pas possible ; si vous en avez vraiment besoin, utilisez
+              un script enveloppe qui pourra prendre en argument le fichier à afficher ou l'entrée standard.
+
+       [1m-r [4m[22minvite[24m, [1m--prompt=[4m[22minvite[0m
+              Si une version récente de [1mless [22mest utilisée comme afficheur, [1mman [22mtentera de régler l'invite ainsi que
+              d'autres options. L'invite par défaut ressemble à :
+
+               [1mManual Page [4m[22mnom[24m[1m([4m[22msection[24m[1m) line [4m[22mx[0m
+
+              dans laquelle [4mnom[24m représente le nom de la page de manuel, [4msection[24m le numéro de section où la  page  a
+              été  trouvée et [4mx[24m le numéro de la ligne actuelle. C'est réalisé en utilisant la variable d'environne‐
+              ment $[1mLESS[22m.
+
+              Fournir [1m-r [22mavec une chaîne écrasera ce comportement par défaut. La chaîne indiquée peut  contenir  la
+              variable  de substitution [1m$MAN_PN [22mqui sera remplacée par le nom de la page de manuel affichée, accom‐
+              pagnée de son numéro de section, entouré par « ( » et « ) ». La chaîne employée pour obtenir  la  va‐
+              leur par défaut ressemble à :
+
+              [1m\ Manual\ page\ \$MAN_PN\ ?ltline\ %lt?L/%L.:[0m
+              [1mbyte\ %bB?s/%s..?\ (END):?pB\ %pB\\%..[0m
+              [1m(tapez h pour l'aide ou q pour quitter)[0m
+
+              Cette  chaîne  a  été coupée en trois lignes, ici, uniquement pour des raisons de lisibilité. Pour sa
+              signification, consultez la page de manuel de [1mless[22m(1). La chaîne de caractères  est  d'abord  évaluée
+              par l'interpréteur de commandes. Tous les guillemets, apostrophes inversées et contre-obliques (anti‐
+              slash)  devant  apparaître  dans  l'invite doivent être précédés du caractère de protection « \ ». La
+              chaîne de caractères de l'invite peut se terminer par un « $ » protégé qui peut être  suivi  d'autres
+              options de [1mless[22m. Par défaut, [1mman [22mutilise l'option [1m-ix8[22m.
+
+              La  variable  d'environnement  $[1mMANLESS [22mdécrite ci-dessous peut être utilisée pour définir une chaîne
+              d’invite par défaut si aucune n’est fournie sur la ligne de commande.
+
+       [1m-7[22m, [1m--ascii[0m
+              En visualisant une page de manuel en [4mascii[24m(7) pur, sur un terminal 7 bits ou sur un émulateur de ter‐
+              minal, certains caractères peuvent ne pas être affichés correctement lors de l'utilisation d'un  des‐
+              cripteur  de  périphérique [4mlatin1[24m(7) avec [1mGNU nroff[22m. Cette option permet aux pages de manuel en [4mascii[0m
+              pur d'être affichées en [4mascii[24m sur des périphériques [4mlatin1[24m. Il n'y aura pas de traduction du texte en
+              [4mlatin1[24m. La table ci-dessous montre les traductions effectuées. Certains éléments de  cette  table  ne
+              peuvent être affichés correctement qu'en utilisant un périphérique [4mlatin1[24m conforme à [1mGNU nroff[22m.
+
+              Description                 Octal   latin1   ascii
+              ───────────────────────────────────────────────────
+              trait d'union                255      ‐        -
+              point médian                 267      •        o
+              accent aigu                  264      ´        '
+              symbole de multiplication    327      ×        x
+
+              Si la colonne [4mlatin1[24m est affichée correctement, votre terminal peut être exploité avec les caractères
+              [4mlatin1[24m  et  cette option est inutile. Si les colonnes [4mlatin1[24m et [4mascii[24m sont identiques, soit vous avez
+              utilisé cette option, soit [1mman [22mn'a pas formaté cette page en utilisant le descripteur de périphérique
+              [4mlatin1[24m. Si la colonne [4mlatin1[24m est absente ou altérée, vous devriez utilisez cette option.
+
+              Cette option est ignorée lors de l'usage des options [1m-t[22m, [1m-H[22m, [1m-T[22m, ou [1m-Z [22met peut être  omise  pour  les
+              [1mnroff [22mautres que ceux du [1mGNU[22m.
+
+       [1m-E [4m[22mencodage[24m, [1m--encoding[22m=[4mencodage[0m
+              Produit  une  sortie  avec  un encodage de caractères autre que celui par défaut. Pour des raisons de
+              compatibilité ascendante, [4mencodage[24m peut être un périphérique [1mnroff [22mtel que  [1mascii[22m,  [1mlatin1[22m,  ou  [1mutf8[0m
+              ainsi qu'une réelle valeur d'encodage comme [1mUTF-8[22m.
+
+       [1m--no-hyphenation[22m, [1m--nh[0m
+              Normalement,  [1mnroff  [22mplace  un  trait  d'union  lorsque les lignes sont coupées même si les mots n'en
+              contiennent pas, s'il est nécessaire de le faire pour arranger les mots sur une  ligne  sans  espace‐
+              ments  excessifs. Cette option désactive la césure automatique, et les mots ne seront coupés que s'il
+              contiennent déjà un trait d'union.
+
+              Pour éviter à [1mnroff [22mde couper un mot au mauvais endroit quand vous écrivez une page de manuel, n'uti‐
+              lisez pas cette option, mais consultez plutôt la documentation de [1mnroff[22m.  Par  exemple,  vous  pouvez
+              placer  « \% » dans un mot pour indiquer qu'il peut être coupé à cet endroit, ou « \% » au début d'un
+              mot pour l'empêcher d'être coupé.
+
+       [1m--no-justification[22m, [1m--nj[0m
+              Normalement, [1mnroff [22mjustifie automatiquement le texte. Cette option désactive la justification,  lais‐
+              sant le texte aligné (ou « ferré ») à droite, aussi appelé « drapeau gauche ».
+
+              Pour éviter à [1mnroff [22mde justifier certains paragraphes quand vous écrivez une page de manuel, n'utili‐
+              sez  pas cette option, mais consultez plutôt la documentation de [1mnroff[22m. Par exemple, vous pouvez uti‐
+              liser les requêtes « .na », « .nf », « .fi » et « .ad » pour désactiver temporairement le réglage  et
+              le remplissage.
+
+       [1m-p [4m[22mchaîne[24m, [1m--preprocessor=[4m[22mchaîne[0m
+              Indique  la  liste  des préprocesseurs à utiliser avant [1mnroff[22m, [1mtroff [22mou [1mgroff[22m. Toutes les implémenta‐
+              tions ne disposent pas du jeu complet de préprocesseurs. Voici une liste de certains  préprocesseurs,
+              avec  les  lettres  les désignant : [1meqn [22m([1me[22m), [1mgrap [22m([1mg[22m), [1mpic [22m([1mp[22m), [1mtbl [22m([1mt[22m), [1mvgrind [22m([1mv[22m), [1mrefer [22m([1mr[22m). Cette
+              option remplace la variable d'environnement $[1mMANROFFSEQ[22m. [1mzsoelim [22mest toujours exécuté comme  le  tout
+              premier préprocesseur.
+
+       [1m-t[22m, [1m--troff[0m
+              Utilise  [1mgroff  -mandoc  [22mpour  mettre en forme la page de manuel sur la sortie standard. Cette option
+              n'est pas nécessaire avec [1m-H[22m, [1m-T[22m, ou [1m-Z[22m.
+
+       [1m-T[22m[[4mpériphérique[24m], [1m--troff-device[22m[=[4mpériphérique[24m]
+              This option is used to change [1mgroff [22m(or possibly [1mtroff's[22m)  output to be suitable for a  device  other
+              than  the  default.  It implies [1m-t[22m. Examples (as of groff 1.23.0) include [1mdvi[22m, [1mlatin1[22m, [1mpdf[22m, [1mps[22m, [1mutf8[22m,
+              [1mX75 [22mand [1mX100[22m.
+
+       [1m-H[22m[[4mnavigateur[24m], [1m--html[22m[=[4mnavigateur[24m]
+              Cette option fera produire à [1mgroff [22mune page au format HTML qui sera ensuite affichée dans un  naviga‐
+              teur web. Le choix du navigateur est déterminé soit par l'argument optionnel [4mnavigateur[24m, s'il est in‐
+              diqué,  soit par la variable d'environnement $[1mBROWSER [22mou sinon par la valeur par défaut indiquée lors
+              de la compilation (habituellement [1mlynx[22m). Cette option induit [1m-t [22met ne fonctionne  qu'avec  les  [1mtroff[0m
+              [1mGNU[22m.
+
+       [1m-X[22m[[4mppp[24m], [1m--gxditview[22m[=[4mppp[24m]
+              Cette  option  affiche la sortie de [1mgroff [22mdans une fenêtre graphique en utilisant le programme [1mgxdit‐[0m
+              [1mview[22m. Le [4mppp[24m (points par pouce) peut être 75 (par défaut), 75-12, 100 ou 100-12. La variante « -12  »
+              utilise une fonte de 12 points. Cette option induit [1m-T [22mavec comme [4mpériphérique[24m respectif X75, X75-12,
+              X100 ou X100-12.
+
+       [1m-Z[22m, [1m--ditroff[0m
+              [1mgroff  [22mexécutera [1mtroff [22mpuis utilisera le postprocesseur approprié afin de produire une sortie exploi‐
+              table par le périphérique choisi. Si [1mgroff -mandoc [22mest [1mgroff [22malors cette option sera passée  à  [1mgroff[0m
+              et aucun postprocesseur ne sera exécuté. Cette option induit [1m-t[22m.
+
+   [1mObtenir de l'aide[0m
+       [1m-?[22m, [1m--help[0m
+              Affiche un message d'aide et s'arrête.
+
+       [1m--usage[0m
+              Affiche un court mode d'emploi et s'arrête.
+
+       [1m-V[22m, [1m--version[0m
+              Affiche le numéro de version.
+
+[1mCODE DE RETOUR[0m
+       [1m0      [22mProgramme exécuté sans erreur.
+
+       [1m1      [22mErreur d'utilisation, de syntaxe ou de fichier de configuration.
+
+       [1m2      [22mErreur d'exécution.
+
+       [1m3      [22mUn processus fils a produit une valeur de retour non nulle.
+
+       [1m16     [22mAu moins une des pages ou un des fichiers ou un des mots-clés n'existe pas ou n'a pas été trouvé.
+
+[1mENVIRONNEMENT[0m
+       [1mMANPATH[0m
+              Si $[1mMANPATH [22mest définie, sa valeur est exploitée comme le chemin de recherche des pages de manuel.
+
+              See the [1mSEARCH PATH [22msection of [1mmanpath[22m(5)  for the default behaviour and details of how this environ‐
+              ment variable is handled.
+
+       [1mMANROFFOPT[0m
+              À  chaque  fois  que  [1mman  [22minvoque  le programme de formattage ([1mnroff[22m, [1mtroff[22m, or [1mgroff[22m), il ajoute le
+              contenu de $[1mMANROFFOPT [22maux options de ce programme.
+
+              For example, [1mMANROFFOPT=-P-i [22mtells the formatter to use italic text (which is only supported by  some
+              terminals) rather than underlined text.
+
+       [1mMANROFFSEQ[0m
+              Si  $[1mMANROFFSEQ  [22mest définie, sa valeur est exploitée pour déterminer l'ensemble des préprocesseurs à
+              appliquer à chacune des pages de manuel. La liste des préprocesseurs est dépendante du  système  uti‐
+              lisé.
+
+       [1mMANSECT[0m
+              Si  $[1mMANSECT  [22mest  définie,  sa valeur est une liste de sections, séparées par des deux-points. Cette
+              liste est utilisée pour déterminer les sections de manuel, et l’ordre, utilisés  pour  la  recherche.
+              C’est  «  1 n l 8 3 0 2 3type 3posix 3pm 3perl 3am 5 4 9 6 7 » par défaut, à moins d’être écrasée par
+              la directive [1mSECTION [22mdans [4m/etc/manpath.config[24m.
+
+       [1mMANPAGER[22m, [1mPAGER[0m
+              Si $[1mMANPAGER [22mou $[1mPAGER [22mest définie ($[1mMANPAGER [22mest prioritaire), sa valeur est exploitée en  tant  que
+              nom  du  programme  utilisé pour afficher les pages de manuel. Par défaut, [1mpager [22mest utilisé, à moins
+              que [1mpager [22mne soit pas défini ou exécutable, auquel cas [1mcat [22mest utilisé.
+
+              La valeur peut être juste un nom de commande ou une commande avec des arguments, et peut utiliser les
+              protections de l'interpréteur (contre-obliques, guillemets  simples  ou  doubles).  L'utilisation  de
+              tubes  pour relier plusieurs commandes n'est pas possible ; si vous en avez vraiment besoin, utilisez
+              un script enveloppe qui pourra prendre en argument le fichier à afficher ou l'entrée standard.
+
+       [1mMANLESS[0m
+              Si $[1mMANLESS [22mest définie, sa valeur sera utilisée comme chaîne  d’invite  par  défaut  de  l'afficheur
+              [1mless[22m,  comme  si elle avait été passée en utilisant l’option [1m-r [22m(donc toutes les occurrences du texte
+              [1m$MAN_PN [22mseront développées de la même façon). Par exemple, si vous voulez obtenir dans tous  les  cas
+              la  chaîne  d'invite  « Ma  chaîne  d'invite » donnez à $[1mMANLESS [22mla valeur « -PsMa chaîne d'invite ».
+              L’utilisation de l’option [1m-r [22mécrasera cette variable d’environnement.
+
+       [1mBROWSER[0m
+              Si $[1mBROWSER [22mest définie, sa valeur est une liste de commandes séparées par  des  deux-points.  Chaque
+              élément de la liste est utilisé pour essayer de lancer un navigateur web lors de l'utilisation de [1mman[0m
+              [1m--html[22m.  Dans  chaque  commande, [4m%s[24m est remplacé par un nom de fichier contenant la page de manuel au
+              format HTML produite à partir de [1mgroff[22m, [4m%%[24m est remplacé par un simple signe « % » et [4m%c[24m est  remplacé
+              par « : ».
+
+       [1mSYSTEM [22mSi  $[1mSYSTEM  [22mest  définie, l'effet sera le même que si on l'avait indiquée comme argument de l'option
+              [1m-m[22m.
+
+       [1mMANOPT [22mSi $[1mMANOPT [22mest définie, elle sera analysée préalablement à la ligne de commande de [1mman [22met son contenu
+              doit avoir un format similaire. Étant donné que les actions produites par l'ensemble des  autres  va‐
+              riables d'environnement spécifiques à [1mman [22mpeuvent être obtenues grâce aux options de la ligne de com‐
+              mande  et  qu'elles  peuvent,  de  ce fait, être placées dans $[1mMANOPT[22m, il est prévu que ces variables
+              d'environnement tombent en désuétude. N'oubliez pas que toutes les espaces qui devront être interpré‐
+              tées comme éléments de l'argument d'une option doivent être protégées.
+
+       [1mMANWIDTH[0m
+              Si $[1mMANWIDTH [22mest définie, sa valeur est utilisée comme indiquant la largeur de la ligne  pour  toutes
+              les pages de manuel qui seront formatées. Si elle est vide, les pages de manuel seront formatées avec
+              une  largeur  de  ligne appropriée au terminal utilisé. Cette largeur sera déterminée d'après les va‐
+              leurs de $[1mCOLUMNS [22met [1mioctl[22m(2) s'il est disponible, soit à 80  colonnes  si  aucune  indication  n'est
+              trouvée.  Les  pages  « cat » ne seront enregistrées que si la mise en forme par défaut est utilisée,
+              c'est-à-dire quand la largeur de ligne du terminal est comprise entre 66 et 80 colonnes.
+
+       [1mMAN_KEEP_FORMATTING[0m
+              Normalement, quand la sortie n'est pas envoyée directement vers un terminal (comme vers un fichier ou
+              un tube), les caractères de mise en page sont effacés pour faciliter la lecture du résultat sans  ou‐
+              til spécial. Cependant, si $[1mMAN_KEEP_FORMATTING [22mcontient une valeur non nulle, les caractères de mise
+              en page sont gardés. Ce peut être utile pour les scripts enveloppes autour de [1mman [22mcapable d'interpré‐
+              ter ces caractères de mise en page.
+
+       [1mMAN_KEEP_STDERR[0m
+              Normalement,  quand  la sortie est envoyée directement vers un terminal (habituellement vers un affi‐
+              cheur), toute sortie d'erreur de la commande utilisée pour produire les versions formatées des  pages
+              de  manuel  est  ignorée  pour  éviter d'interférer avec l'affichage de la page. Des programmes comme
+              [1mgroff [22mproduisent souvent des messages d'erreur relativement mineurs à propos  de  problèmes  typogra‐
+              phiques  comme de mauvais alignements. L'affichage de la page de manuel s'en trouve enlaidi et dérou‐
+              tant. Cependant, certains utilisateurs veulent tout de même voir ces erreurs, donc si  $[1mMAN_KEEP_FOR‐[0m
+              [1mMATTING [22mcontient une valeur non nulle, la sortie d'erreur sera affichée comme d'habitude.
+
+       [1mMAN_DISABLE_SECCOMP[0m
+              On  Linux, [1mman [22mnormally confines subprocesses that handle untrusted data using a [1mseccomp[22m(2)  sandbox.
+              This makes it safer to run complex parsing code over arbitrary manual pages. If this goes  wrong  for
+              some reason unrelated to the content of the page being displayed, you can set $[1mMAN_DISABLE_SECCOMP [22mto
+              any non-empty value to disable the sandbox.
+
+       [1mPIPELINE_DEBUG[0m
+              If  the $[1mPIPELINE_DEBUG [22menvironment variable is set to "1", then [1mman [22mwill print debugging messages to
+              standard error describing each subprocess it runs.
+
+       [1mLANG[22m, [1mLC_MESSAGES[0m
+              Suivant le système et l'implémentation, soit $[1mLANG[22m, soit $[1mLC_MESSAGES[22m, soit les deux, seront interro‐
+              gées pour déterminer la langue ou le dialecte utilisé. [1mman [22maffichera ses messages dans  cette  langue
+              ou ce dialecte (s'ils sont disponibles). Consultez [1msetlocale[22m(3) pour plus de précisions.
+
+[1mFICHIERS[0m
+       [4m/etc/manpath.config[0m
+              Fichier de configuration de man-db.
+
+       [4m/usr/share/man[0m
+              Structure hiérarchique de pages de manuel globale
+
+[1mSTANDARDS[0m
+       POSIX.1-2001, POSIX.1-2008, POSIX.1-2017.
+
+[1mVOIR AUSSI[0m
+       [1mapropos[22m(1),  [1mgroff[22m(1),  [1mless[22m(1),  [1mmanpath[22m(1), [1mnroff[22m(1), [1mtroff[22m(1), [1mwhatis[22m(1), [1mzsoelim[22m(1), [1mmanpath[22m(5), [1mman[22m(7),
+       [1mcatman[22m(8), [1mmandb[22m(8)
+
+       La documentation de certains paquets peut être disponible dans d'autres formats tel que [1minfo[22m(1) ou HTML.
+
+[1mHISTORIQUE[0m
+       1990, 1991 – Première version écrite par John W. Eaton (jwe@che.utexas.edu).
+
+       23 Décembre 1992 : Rik Faith (faith@cs.unc.edu)  a  appliqué  les  correctifs  fournis  par  Willem  Kasdorp
+       (wkasdo@nikhefk.nikef.nl).
+
+       30  avril 1994 – 23 février 2000 : Wilf. (G.Wilford@ee.surrey.ac.uk) a développé et assuré la maintenance de
+       ce programme avec l'aide de quelques personnes motivées.
+
+       30 octobre 1996 – 30 mars 2001 : Fabrizio Polacco <fpolacco@debian.org> a assuré la maintenance et développé
+       ce programme pour le projet Debian avec l'aide de toute la communauté.
+
+       Depuis le 31 mars 2001 : Colin Watson <cjwatson@debian.org> est désormais le responsable et  le  développeur
+       de man-db.
+
+[1mBOGUES[0m
+       https://gitlab.com/man-db/man-db/-/issues
+       https://savannah.nongnu.org/bugs/?group=man-db
+
+[1mTRADUCTION[0m
+       Cette  traduction est maintenue à l'aide de l'outil po4a <URL:https://po4a.org/> par l'équipe francophone de
+       traduction de Debian.
+
+       Valéry Perrin <valery.perrin.debian@free.fr> le 2 janvier 2006. David Prévot <david@tilapin.org> et l'équipe
+       francophone de traduction de Debian (2010).
+
+       Veuillez signaler toute erreur de traduction en écrivant à <debian-l10n-french@lists.debian.org> ou  par  un
+       rapport de bogue sur le paquet man-db.
+
+       Vous  pouvez  toujours  avoir accès à la version anglaise de ce document en utilisant la commande « [1mman -L C[0m
+       [4m<section>[24m [4m<page_de_man>[24m ».
+
+2.13.1                                               2025-05-02                                              [4mMAN[24m(1)
