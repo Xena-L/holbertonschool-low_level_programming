@@ -1,16 +1,15 @@
 #include "main.h"
 
 /**
- * _strlen_recursion - retourne la longueur d'une chaîne de caractères
- * @s: chaîne à mesurer
- *
- * Return: longueur de la chaîne
+ * _print_rev_recursion - affiche une chaîne de caractères en ordre inverse
+ * @s: chaîne à afficher
  */
 
-int _strlen_recursion(char *s)
+void _print_rev_recursion(char *s)
 {
-	if (*s == '\0')  /* condition de fin */
-		return 0;
+	if (*s == '\0')
+		return;
 
-	return 1 + _strlen_recursion(s + 1); /* compte 1 + longueur du reste */
+	_print_rev_recursion(s + 1);
+	_putchar(*s);
 }
