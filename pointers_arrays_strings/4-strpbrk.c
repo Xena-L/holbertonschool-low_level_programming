@@ -1,5 +1,5 @@
 #include "main.h"
-#include <stddef.h> /* pour NULL */
+#include <stddef.h>
 
 /**
 * _strpbrk - cherche le premier caractère dans s
