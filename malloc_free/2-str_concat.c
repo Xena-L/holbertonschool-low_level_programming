@@ -15,7 +15,7 @@ unsigned int i, j, len1, len2;
 char *result;
 
 if (s1 == NULL)
-        s1 = "";
+s1 = "";
 if (s2 == NULL)
 s2 = "";
 
